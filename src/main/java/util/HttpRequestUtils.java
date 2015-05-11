@@ -1,6 +1,7 @@
 package util;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -12,13 +13,13 @@ public class HttpRequestUtils {
 	 * @param queryString은 URL에서 ? 이후에 전달되는 name=value 임
 	 * @return
 	 */
-	public static Map<String, String> parseQueryString(String queryString) {
+	public static HashMap<String, String> parseQueryString(String queryString) {
 		if (Strings.isNullOrEmpty(queryString)) {
 			return Maps.newHashMap();
 		}
 		
 		String[] tokens = queryString.split("&");
-		return Arrays.stream(tokens)
+		return (HashMap<String, String>) Arrays.stream(tokens)
 					.map(t -> getKeyValue(t, "="))
 					.filter(p -> p != null)
 					.collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));

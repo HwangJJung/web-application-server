@@ -3,6 +3,7 @@ package util;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
@@ -13,7 +14,7 @@ public class HttpRequestUtilsTest {
 	@Test
 	public void parseQueryString() {
 		String queryString = "userId=javajigi";
-		Map<String, String> parameters = HttpRequestUtils.parseQueryString(queryString);
+		HashMap<String, String> parameters = HttpRequestUtils.parseQueryString(queryString);
 		assertThat(parameters.get("userId"), is("javajigi"));
 		assertThat(parameters.get("password"), is(nullValue()));
 		
@@ -25,7 +26,7 @@ public class HttpRequestUtilsTest {
 	
 	@Test
 	public void parseQueryString_null() {
-		Map<String, String> parameters = HttpRequestUtils.parseQueryString(null);
+		HashMap<String, String> parameters = HttpRequestUtils.parseQueryString(null);
 		assertThat(parameters.isEmpty(), is(true));
 		
 		parameters = HttpRequestUtils.parseQueryString("");
@@ -38,7 +39,7 @@ public class HttpRequestUtilsTest {
 	@Test
 	public void parseQueryString_invalid() {
 		String queryString = "userId=javajigi&password";
-		Map<String, String> parameters = HttpRequestUtils.parseQueryString(queryString);
+		HashMap<String, String> parameters = HttpRequestUtils.parseQueryString(queryString);
 		assertThat(parameters.get("userId"), is("javajigi"));
 		assertThat(parameters.get("password"), is(nullValue()));
 	}
